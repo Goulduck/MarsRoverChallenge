@@ -105,5 +105,15 @@ describe.only("MarsRover", function() {
         })
     })
 
+    describe('Checks if next move is an obstacles', () => {
+        it('Returns false if no obstacle', () => {
+            const rover = new MarsRover([1,2], 'N')
+            assert.equal(rover.isObstacle([1,3]), false)
+        })
 
+        it('Returns true if obstacle', () => {
+            const rover = new MarsRover([1,2], 'N', [[1,3],[7,9]])
+            assert.equal(rover.isObstacle([1,3]), true)
+        })
+    })
 })
