@@ -1,9 +1,9 @@
 const MarsRover = require('../src/MarsRover')
-let chai = require('chai');
-const expect = chai.expect;
+const chai = require('chai');
+const sinon = require('sinon')
 const assert = chai.assert
 
-describe.only("MarsRover", function() {
+describe("MarsRover", function() {
     it("Returns correct starting co-ordinates", () => {
         const rover = new MarsRover([ 1, 2 ], 'N')
         assert.deepEqual([ 1, 2 ], rover.coordinates)
@@ -114,6 +114,51 @@ describe.only("MarsRover", function() {
         it('Returns true if obstacle', () => {
             const rover = new MarsRover([1,2], 'N', [[1,3],[7,9]])
             assert.equal(rover.isObstacle([1,3]), true)
+        })
+    })
+
+    describe('Runs the correct action', () => {
+        const sandbox = sinon.createSandbox()
+        let rover
+
+        beforeEach(() => {
+            rover = new MarsRover([1,2], 'N')
+            sandbox.stub(rover, 'turn')
+            sandbox.stub(rover, 'move')
+        })
+
+        afterEach(() => {
+            sandbox.restore()
+        })
+
+        it('turns with L', () => {
+            rover.runCommand('L')
+            assert(rover.turn.calledWith('L'))
+        })
+
+        it('turns with R', () => {
+            rover.runCommand('R')
+            assert(rover.turn.calledWith('R'))
+        })
+
+        it('moves with M', () => {
+            rover.runCommand('M')
+            assert(rover.move.calledWith())
+        })
+
+        it('doesn\'t turn with M', () => {
+            rover.runCommand('M')
+            assert(!rover.turn.calledWith())
+        })
+
+        it('doesn\'t move with L', () => {
+            rover.runCommand('L')
+            assert(!rover.move.calledWith())
+        })
+
+        it('doesn\'t move with R', () => {
+            rover.runCommand('R')
+            assert(!rover.move.calledWith())
         })
     })
 })

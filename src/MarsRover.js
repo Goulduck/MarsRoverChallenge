@@ -25,6 +25,7 @@ class MarsRover {
         } else if (this.direction === 'W') {
             xIncrease = -1
         }
+
         const newLocation = [(this.coordinates[0] + xIncrease), (this.coordinates[1] + yIncrease)]
         if (this.isObstacle(newLocation)) throw new Error('Unable to move. Co-ordinates result in collision')
         this.coordinates = newLocation
@@ -34,10 +35,10 @@ class MarsRover {
         const cardinals = ['N', 'E', 'S', 'W']
         const directionToIndex = cardinalIndex(this.direction)
         let newDirection
-        if (command == 'L') {
-            newDirection = (directionToIndex == 0) ? 'W' : cardinals[directionToIndex - 1]
+        if (command === 'L') {
+            newDirection = (directionToIndex === 0) ? 'W' : cardinals[directionToIndex - 1]
         } else {
-            newDirection = (directionToIndex == 3) ? 'N' : cardinals[directionToIndex + 1]
+            newDirection = (directionToIndex === 3) ? 'N' : cardinals[directionToIndex + 1]
         }
 
         this.direction = newDirection
@@ -47,6 +48,10 @@ class MarsRover {
         return !!this.obstacles.filter(obstacle => {
             return obstacle[0] == coordinates[0] && obstacle[1] == coordinates[1]
         }).length
+    }
+
+    runCommand = command => {
+        command === 'M' ? this.move() : this.turn(command)
     }
 }
 
