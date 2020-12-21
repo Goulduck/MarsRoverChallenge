@@ -41,7 +41,7 @@ Tests can then be run by using `npm test`.
 
 Alternatively, to run your own commands:
 
-node ./src/MissionControl.js runMission 'YOUR_INPUT_STRING_HERE'
+`node ./src/MissionControl.js runMission 'YOUR_INPUT_STRING_HERE'`
 
 #### What's Next?
 * Forward and backwards moves.
