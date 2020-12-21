@@ -38,3 +38,13 @@ MMRMMRMRRM
 
 To run project clone this directory and run `npm i`.
 Tests can then be run by using `npm test`.
+
+Alternatively, to run your own commands:
+
+node ./src/MissionControl.js runMission 'YOUR_INPUT_STRING_HERE'
+
+#### What's Next?
+* Forward and backwards moves.
+* Random Mission generator function
+* Allow external obstacles i.e. Boulders/dead zones etc.
+* Command line output of plateau visually (Maybe showing explored percentage?)
